@@ -12,14 +12,14 @@
 			<button class="button"  @click="butLogin">登录</button>
 		</div>
 		<div class="line register-p">
-			<span class="span1">还没有账号？<i> <router-link to="/register">注册一个</router-link></i></span>	
+			<span class="span1">还没有账号？<i> <router-link to="/register">注册一个</router-link></i></span>
 		</div>
 		<myTip :isShow="mytipShow"  :text="myTipText" @closeModal="mytipShow = !mytipShow"></myTip>
 	</div>
 </template>
 
 <script>
-	import tip from './common/tiptip'
+	import tip from './common/tip'
 	export  default{
 		http:{
 			emulateJSON:true
@@ -50,7 +50,7 @@
 						this.eyeIsShow = false
 					}else{
 						this.eyeIsShow = true
-					}                                                                                                                                                                                                                                                                                             
+					}
 				}
 			}
 		},
@@ -75,7 +75,7 @@
 					this.mytipShow=true;
 					return;
 				}
-				
+
 				that.post("/user/login",{
 						phone:that.userName,
 						password:that.passWord

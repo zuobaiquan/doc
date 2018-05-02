@@ -16,7 +16,7 @@
 </template>
 
 <script>
-	import tip from './common/tiptip'
+	import tip from './common/tip'
 	export  default{
 		http:{
 			emulateJSON:true
@@ -42,7 +42,7 @@
 						this.eyeIsShow = false
 					}else{
 						this.eyeIsShow = true
-					}                                                                                                                                                                                                                                                                                             
+					}
 				}
 			}
 		},
@@ -81,7 +81,7 @@
 					this.mytipShow=true;
 					return;
 				}
-				
+
 				that.post("/user/login",{
 						phone:that.userName,
 						password:that.passWord

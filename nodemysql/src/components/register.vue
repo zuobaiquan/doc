@@ -18,7 +18,7 @@
 </template>
 
 <script>
-	import tip from './common/tiptip'
+	import tip from './common/tip'
 	export default{
 		data () {
 			return {
@@ -26,7 +26,7 @@
 				phone:null,
 				checkNum:null,
 				password:null,
-				checkNumberss:null,//后台获取的验证码	
+				checkNumberss:null,//后台获取的验证码
 				showClear:false,
 				mytipShow : false,
 				myTipText : "",
@@ -52,7 +52,7 @@
 			// 		console.log(err);
 			// 	});
 			// },
-			
+
 			//提交注册请求
 			register(){
 				var that=this;
@@ -64,7 +64,7 @@
 					this.myTipText="请输入正确的手机号码";
 					return;
 				}
-				
+
 				//检验密码
 				if(!this.password){
 					this.mytipShow=true;
@@ -78,7 +78,7 @@
 				//   this.myTipText="密码格式不正确";
 				//   return;
 				// }
-				
+
 				this.post("/user/add",{
 					phone:this.phone,
 					password:this.password
