@@ -18,7 +18,7 @@
 </template>
 
 <script>
-	import tip from './common/tip'
+	import tip from '@/components/tip'
 	export default{
 		data () {
 			return {
@@ -85,7 +85,12 @@
 				}).then((res)=>{
 					//保存账号和token
 					console.log(res);
-					that.$router.push("/login");
+					if(res.status==200){
+						that.$router.push("/login");
+					}
+					else{
+						console.log(res);
+					}
 				}).catch((err)=>{
 					console.log(err);
 				});
@@ -135,5 +140,5 @@
 </script>
 
 <style lang="scss" scoped>
-@import '../scss/registerlogin';
+@import '../../scss/registerlogin';
 </style>

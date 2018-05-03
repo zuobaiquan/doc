@@ -1,25 +1,21 @@
 <template>
 	<div class="register-login" >
 		<div class="line input-phone">
-			<input ref="userName" id="account" placeholder="请输入手机号"  @input="addFormat" maxlength="13" />
+			<input ref="userName" id="account" placeholder="请输入手机号" @input="addFormat" maxlength="13" />
 			<span v-if="showClear" class="content-clear" @click="clearUserName"></span>
 		</div>
 		<div class="line input-password">
-			<input id="password" placeholder="请输入密码"  v-model="passWord"  :type="isPassWord?'text':'password'">
-			<span  v-show="eyeIsShow" class='but-nosee' :class="{'see':isPassWord}" @click="changePassShow()"></span>
+			<input id="password" placeholder="请输入密码" v-model="passWord" :type="isPassWord?'text':'password'">
+			<span v-show="eyeIsShow" class='but-nosee' :class="{'see':isPassWord}" @click="changePassShow()"></span>
 		</div>
 		<div class="line">
-			<button class="button"  @click="butLogin">登录</button>
+			<button class="button" @click="butLogin">修改</button>
 		</div>
-		<div class="line register-p">
-			<span class="span1">还没有账号？<i> <router-link to="/register">注册一个</router-link></i></span>
-		</div>
-		<myTip :isShow="mytipShow"  :text="myTipText" @closeModal="mytipShow = !mytipShow"></myTip>
+		<myTip :isShow="mytipShow" :text="myTipText" @closeModal="mytipShow = !mytipShow"></myTip>
 	</div>
 </template>
-
 <script>
-	import tip from './common/tip'
+	import tip from '@/components/tip'
 	export  default{
 		http:{
 			emulateJSON:true
@@ -38,11 +34,6 @@
 		components:{
 			myTip:tip
 		},
-		computed:{
-			userinfo(){
-				return this.$store.state.userInfo;
-			}
-		},
 		watch: {
 			passWord : {
 				handler(newval){
@@ -53,6 +44,20 @@
 					}
 				}
 			}
+		},
+		created(){
+			var that=this;
+			this.get("/user/find",{
+				id:that.$route.params.id
+			}).then(res => {
+				console.log(res);
+				if(res.status==200){
+					//that.$router.push("/index");
+					//that.$store.dispatch("fetchUsernfo",{userName:that.userName,passWord:that.passWord})
+				}
+			},(err)=>{
+				console.log(err);
+			})
 		},
 		methods:{
 			//点击登录按钮
@@ -75,7 +80,6 @@
 					this.mytipShow=true;
 					return;
 				}
-
 				that.post("/user/login",{
 						phone:that.userName,
 						password:that.passWord
@@ -96,10 +100,9 @@
 				this.$refs.userName.value='';
 				this.showClear = false
 			},
-
-			//账号输入框 3 4 4的格式
+			//手机号码输入格式： 3 4 4
 			addFormat(e){
-				var val = e.target.value
+				  var val = e.target.value
 					var arr = val.split(' ');
 					var Arr = [];
 					var Str = '';
@@ -134,5 +137,5 @@
 	}
 </script>
 <style lang="scss">
-@import '../scss/registerlogin';
+@import '../../scss/registerlogin';
 </style>

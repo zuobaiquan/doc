@@ -7,9 +7,10 @@ import router from './router'
 import store from './store'
 
 Vue.config.productionTip = false
-import http from './common/QueryString'
+import http from './common/apiRequest'
 Vue.prototype.get = http.get
 Vue.prototype.post = http.post
+Vue.prototype.delete = http.delete
 import "./assets/css/base.css"
 
 new Vue({

@@ -9,14 +9,17 @@
 			<span  v-show="eyeIsShow" class='but-nosee' :class="{'see':isPassWord}" @click="changePassShow()"></span>
 		</div>
 		<div class="line">
-			<button class="button"  @click="butLogin">修改</button>
+			<button class="button"  @click="butLogin">登录</button>
+		</div>
+		<div class="line register-p">
+			<span class="span1">还没有账号？<i> <router-link to="/register">注册一个</router-link></i></span>
 		</div>
 		<myTip :isShow="mytipShow"  :text="myTipText" @closeModal="mytipShow = !mytipShow"></myTip>
 	</div>
 </template>
 
 <script>
-	import tip from './common/tip'
+	import tip from '@/components/tip'
 	export  default{
 		http:{
 			emulateJSON:true
@@ -35,6 +38,11 @@
 		components:{
 			myTip:tip
 		},
+		computed:{
+			userinfo(){
+				return this.$store.state.userInfo;
+			}
+		},
 		watch: {
 			passWord : {
 				handler(newval){
@@ -45,20 +53,6 @@
 					}
 				}
 			}
-		},
-		created(){
-			var that=this;
-			this.get("/user/find",{
-				id:that.$route.params.id
-			}).then(res => {
-				console.log(res);
-				if(res.status==200){
-					//that.$router.push("/index");
-					//that.$store.dispatch("fetchUsernfo",{userName:that.userName,passWord:that.passWord})
-				}
-			},(err)=>{
-				console.log(err);
-			})
 		},
 		methods:{
 			//点击登录按钮
@@ -140,5 +134,5 @@
 	}
 </script>
 <style lang="scss">
-@import '../scss/registerlogin';
+@import '../../scss/registerlogin';
 </style>

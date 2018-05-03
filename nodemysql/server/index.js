@@ -8,9 +8,11 @@ app.use(cors())
 var user = require('./user')
 app.use(user)
 
-var server = app.listen(8088,'192.168.1.100', function () {
+
+
+var server = app.listen(4000,'172.30.67.142', function () {
   var host = server.address().address
-  console.log(server.address());
+  console.log(server.address())
   var port = server.address().port
   console.log("应用实例，访问地址为 http://%s:%s", host, port)
 })

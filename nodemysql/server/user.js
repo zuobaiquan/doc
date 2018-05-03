@@ -8,7 +8,7 @@ router.post('/user/add', (req, res) => {
 	pool.getConnection((err, connection) => {
 		connection.query('select * from user where phone=?', [req.body.phone], (err, result) => {
 			if (result.length > 0) {
-				res.status(500).send({code: 500,message:'phone exist'})
+				res.status(500).send({code: 500,message:'手机号码已注册'})
 			} else {
 				connection.query(sql, [req.body.phone, req.body.password, req.body.role], (err, data) => {
 					if (err) {
@@ -21,7 +21,7 @@ router.post('/user/add', (req, res) => {
 				})
 			}
 		})
-	}) 
+	})
 })
 
 // 登录
@@ -40,7 +40,7 @@ router.post('/user/login', (req, res) => {
 			}
 			connection.release();
 		})
-	}) 
+	})
 })
 
 // 用户列表
@@ -55,15 +55,31 @@ router.get('/user/list', (req, res) => {
 			}
 			connection.release();
 		})
-	}) 
+	})
 })
 
 // 用户列表
-// /user/edit
+// /user/find
 router.get('/user/find', (req, res) => {
 	pool.getConnection((err, connection) => {
 		var sqlRes=connection.query('select * from user where id=?',[req.query.id], (error, result) => {
-			// console.log(error, result);	
+			// console.log(error, result);
+			if (error) {
+				res.status(500).send(error)
+			} else {
+				res.status(200).send({code: 'ok',data:result,message:'success'})
+			}
+		})
+		connection.release();
+	})
+})
+
+// 删除用户
+// /user/delete
+router.delete('/user/delete', (req, res) => {
+	pool.getConnection((err, connection) => {
+		var sqlRes=connection.query('delete from user where id=?',[req.query.id], (error, result) => {
+			// console.log(error, result);
 			if (error) {
 				res.status(500).send(error)
 			} else {

@@ -1,9 +1,9 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import Index from '../components/index'
-import login from "../components/login"
-import register from "../components/register"
-import editUser from "../components/edituser"
+import Index from '../view/user/index'
+import login from "../view/user/login"
+import register from "../view/user/register"
+import editUser from "../view/user/edituser"
 
 Vue.use(Router)
 

@@ -9,8 +9,9 @@
 				<span>
 						<router-link :to="{ name: 'edituser', params: item}">修改</router-link>
 				</span>
+				<span @click="deleteUser(item.id)">删除</span>
 			</li>
-		</ul>	
+		</ul>
 	</div>
 </template>
 <script>
@@ -25,10 +26,31 @@ export default{
 		this.get("/user/list",{}).then(res => {
 			that.userlist=res.data.data;
 		}).catch((err)=>{
-			
+
 		});
+	},
+	methods:{
+		deleteUser(id){
+			let that=this;
+			this.delete("/user/delete",{
+				id:id
+			}).then(res => {
+				if((res.status==200)&&(res.data.data.affectedRows>0)){
+					console.log("删除成功");
+					that.userlist.forEach((item,index)=>{
+						if(item.id==id){
+							that.userlist.splice(index,1);
+						}
+					})
+				}else{
+					console.log("删除失败");
+				}
+			}).catch((err)=>{
+
+			});
+		}
 	}
-}     
+}
 </script>
 <style lang="scss">
 .userlist-box{

@@ -35,7 +35,6 @@
 						this.$emit('closeModal')
 					},3000)
 				}
-
 			}
 		},
 		methods:{
@@ -47,5 +46,5 @@
 	}
 </script>
 <style lang="scss">
-@import '../../scss/component/tip';
+@import '../scss/component/tip';
 </style>
