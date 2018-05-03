@@ -2,15 +2,15 @@
 Navicat MySQL Data Transfer
 
 Source Server         : phpMyAdmin
-Source Server Version : 50617
+Source Server Version : 50709
 Source Host           : localhost:3306
 Source Database       : nodeproject
 
 Target Server Type    : MYSQL
-Target Server Version : 50617
+Target Server Version : 50709
 File Encoding         : 65001
 
-Date: 2018-04-29 22:57:11
+Date: 2018-05-03 17:47:28
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -21,14 +21,15 @@ SET FOREIGN_KEY_CHECKS=0;
 DROP TABLE IF EXISTS `user`;
 CREATE TABLE `user` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `phone` varchar(45) DEFAULT NULL,
-  `password` varchar(45) DEFAULT NULL,
+  `phone` varchar(255) NOT NULL,
+  `password` char(32) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of user
 -- ----------------------------
-INSERT INTO `user` VALUES ('1', '15671559817', '123456');
-INSERT INTO `user` VALUES ('5', '15671559810', '111');
-INSERT INTO `user` VALUES ('6', '15671559811', '1111');
+INSERT INTO `user` VALUES ('1', '15671559817', '111111');
+INSERT INTO `user` VALUES ('2', '15671559816', 'abcdefg');
+INSERT INTO `user` VALUES ('3', '15671559815', 'lkdhhjss');
+INSERT INTO `user` VALUES ('4', '15671559814', 'djheuehj');
